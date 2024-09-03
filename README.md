@@ -3,11 +3,17 @@
 os arquivos estruturas.h e estruturas.c buscam implementar uma classe chamada Registro com cada um dos campos especificados:
 
 a.SPECIES_ID -> 4 bytes (int)
+
 b. NAME -> 41 bytes
+
 c. SCIENTIFIC_NAME -> 61 bytes
+
 d. POPULATION-> 4 bytes (int)
+
 e. STATUS-> 9 bytes
+
 f. LOCATION -> 8 bytes (2 floats de 4 bytes)
+
 g. HUMAN_IMPACT -> 4 bytes (int)
 
 Metodos do registro em estruturas.c:
