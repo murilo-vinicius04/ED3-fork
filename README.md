@@ -1,4 +1,4 @@
-# ED3
+# Exercicio1ED3
 
 os arquivos estruturas.h e estruturas.c buscam implementar uma classe chamada Registro com cada um dos campos especificados:
 
