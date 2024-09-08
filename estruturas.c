@@ -6,7 +6,8 @@
 #include <string.h>
 
 // o presente struct representa o registro de animais marinhos do arquivo
-typedef struct {
+typedef struct
+{
     int especie;
     char nome[41];
     char nome_cientifico[61];
@@ -18,7 +19,7 @@ typedef struct {
 
 // essa funcao recebe o ponteiro de um arquivo, o byte offset do registro,
 // e o ponteiro do registro que salvara os dados
-// a seguinte funcao le o registro com byteoffset do arquivo 
+// a seguinte funcao le o registro com byteoffset do arquivo
 void le_registro(Registro *registro, FILE *arquivo, int offset)
 {
     // arruma o ponteiro para o inicio do registro e le os valores
@@ -42,6 +43,50 @@ void printa_formatado(Registro *registro)
     printf("Status: %s\n", registro->status);
     printf("Localização: (%.2f, %.2f)\n", registro->localizacao[0], registro->localizacao[1]);
     printf("Impacto Humano: %d\n", registro->impacto_humano);
+}
+int busca_por_id(int id, FILE *arquivo)
+{
+    int id_cmp = 0, tamanho = tamanho_bytes(arquivo);
+
+    for (int i = 0; i < tamanho; i += 131)
+    {
+        fseek(arquivo, i, SEEK_SET);
+        fread(&id_cmp, sizeof(int), 1, arquivo);
+
+        if (id_cmp == id)
+        {
+            return i;
+        }
+    }
+
+    return -1;
+}
+
+void preenche_string(char *string, size_t tamanho)
+{
+    size_t len = strlen(string);
+
+    if (len < tamanho - 1)
+    {
+        string[len] = '\0';
+    }
+
+    for (size_t i = len + 1; i < tamanho; i++)
+    {
+        string[i] = '$';
+    }
+}
+
+void limpa_campo(char *campo, size_t tamanho)
+{
+    for (size_t i = 0; i < tamanho; i++)
+    {
+        if (campo[i] == '$')
+        {
+            campo[i] = '\0';
+            break;
+        }
+    }
 }
 
 #endif
